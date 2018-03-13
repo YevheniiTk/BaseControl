@@ -11,16 +11,18 @@ namespace ControlWork2
         static void Main(string[] args)
         {
             string input = "Kharkiv=1431000,Kiev=2804000,Las Vegas=603400";
+            Console.WriteLine($"Enter the string as - {input}");
+            input = Console.ReadLine();
 
             try
             {
-                var citys = ParseStringAndAddObjectToList(input);
+                var cities = ParseStringAndAddObjectToList(input);
 
-                var cityWithMostPopulated = GetCityWithMostPopulated(citys);
-                var cityWithLongestName = GetCityWithLongestName(citys);
+                var cityMostPopulated = GetCityWithMostPopulated(cities);
+                var cityWithLongestName = GetCityWithLongestName(cities);
 
-                Console.WriteLine($"Most populated: {cityWithMostPopulated.Name}" +
-                                $"({cityWithMostPopulated.Population} people)");
+                Console.WriteLine($"Most populated: {cityMostPopulated.Name}" +
+                                $"({cityMostPopulated.Population} people)");
                 Console.WriteLine($"Longest name: {cityWithLongestName.Name}" +
                                 $"({cityWithLongestName.Name.Length} letters)");
             }
@@ -44,10 +46,10 @@ namespace ControlWork2
             var citys = new List<City>();
             var arrayCityes = input.Split(',');
 
-            foreach (var i in arrayCityes)
+            foreach (string city in arrayCityes)
             {
-                var cityAndPopulate = i.Split('=');
-                citys.Add(new City(cityAndPopulate[0], Convert.ToInt32(cityAndPopulate[1])));
+                var cityAndPopulation = city.Split('=');
+                citys.Add(new City(cityAndPopulation[0], Convert.ToInt32(cityAndPopulation[1])));
             }
             return citys;
         }
